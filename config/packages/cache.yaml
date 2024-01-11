@@ -17,3 +17,14 @@ framework:
         # Namespaced pools use the above "app" backend by default
         #pools:
             #my.dedicated.cache: null
+
+when@dev: &dev
+    services:
+        cache.adapter.null:
+            class: Symfony\Component\Cache\Adapter\NullAdapter
+
+    framework:
+        cache:
+            app: cache.adapter.null
+
+when@test: *dev
