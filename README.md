@@ -6,7 +6,7 @@
 # install dependencies
 composer install
 
-# install node modules (optional but required for using tailwindcss PhpStorm plugin)
+# install node modules (used for development)
 npm install
 
 # start local server

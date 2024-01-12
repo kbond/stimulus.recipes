@@ -1,0 +1,2 @@
+symfonycasts_tailwind:
+    binary: '%kernel.project_dir%/node_modules/.bin/tailwindcss'
