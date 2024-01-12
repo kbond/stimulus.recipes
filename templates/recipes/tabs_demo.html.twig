@@ -1,0 +1,23 @@
+<div
+    data-controller="tabs"
+    data-tabs-active-class="bg-gray-900 text-gray-100"
+    data-tabs-default-tab-value="tab1"
+>
+    <!-- buttons to toggle between tabs -->
+    <div class="flex">
+        <button id="tab1" data-tabs-target="btn" data-action="click->tabs#select">Tab1</button>
+        <button id="tab2" data-tabs-target="btn" data-action="click->tabs#select">Tab2</button>
+    </div>
+
+    <!-- the tabs -->
+    <div>
+        <div data-tabs-target="tab" id="tab1">
+            Tab 1 content
+        </div>
+
+        <!-- tab 2 is hidden by default, to prevent 'flashing in' -->
+        <div data-tabs-target="tab" id="tab2" hidden>
+            Tab 2 content
+        </div>
+    </div>
+</div>
