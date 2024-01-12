@@ -5,19 +5,25 @@
 
 {% block content %}
     <h1 class="text-3xl font-bold">{{ recipe.title }}</h1>
-    <p class="mt-1">{{ recipe.description }}</p>
+    <p>{{ recipe.description }}</p>
+
+    {% if recipe.controllerName %}
+        <h2 class="text-1xl font-semibold mt-3">Stimulus Controller</h2>
+        <p><em>{{ recipe.controllerName }}</em></p>
+        <pre class="mt-1"><code>{{ recipe.controllerSource|escape }}</code></pre>
+    {% endif %}
 
     {% if recipe.demo %}
-        <h2 class="text-1xl font-semibold mt-1">Demo</h2>
+        <h2 class="text-1xl font-semibold mt-3">Demo</h2>
         <div class="mt-1">
             {{ include(recipe.demo) }}
         </div>
-        <h2 class="text-1xl font-semibold mt-1">Source</h2>
+        <h2 class="text-1xl font-semibold mt-3">Source</h2>
         <pre class="mt-1"><code>{{ source(recipe.demo)|escape }}</code></pre>
     {% endif %}
 
     {% if recipe.credit %}
-        <h2 class="text-2xl font-semibold mt-1">Credit</h2>
+        <h2 class="text-2xl font-semibold mt-3">Credit</h2>
         <ul>
             {% for name,url in recipe.credit %}
                 <li><a href="{{ url }}">{{ name matches '/^\\d+$/' ? url : name }}</a></li>
