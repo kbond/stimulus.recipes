@@ -2,54 +2,28 @@
 
 namespace App;
 
+use App\Recipe\File;
+
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
- *
- * @phpstan-type Manifest array{
- *     title: string,
- *     description: string,
- *     controller?: string,
- *     dependencies?: array{
- *         js?: string[],
- *     },
- *     demo?: string,
- *     credit?: string|string[],
- *  }
  */
 final class Recipe
 {
-    public readonly string $title;
-    public readonly string $description;
-    public readonly ?string $demo;
+    public readonly File $controller;
 
-    /** @var string[] */
-    public readonly array $credit;
+    public function __construct(
+        public readonly string $name,
+        public readonly string $title,
+        public readonly string $description,
+        string $controller,
 
-    /** @var array{js?: string[]} */
-    private readonly array $dependencies;
-    private readonly ?string $controller;
+        /** @var string[] */
+        public readonly array $credit,
 
-    /**
-     * @param Manifest $manifest
-     */
-    public function __construct(public readonly string $name, array $manifest)
-    {
-        $this->title = $manifest['title'] ?? throw new \InvalidArgumentException('Missing title');
-        $this->description = $manifest['description'] ?? throw new \InvalidArgumentException('Missing description');
-        $this->controller = $manifest['controller'] ?? null;
-        $this->demo = $manifest['demo'] ?? null;
-        $this->credit = (array) ($manifest['credit'] ?? []);
-        $this->dependencies = $manifest['dependencies'] ?? [];
-    }
-
-    public function controllerName(): ?string
-    {
-        return $this->controller ? basename($this->controller) : null;
-    }
-
-    public function controllerSource(): ?string
-    {
-        return $this->controller ? file_get_contents($this->controller) : null;
+        /** @var array{js?: string[]} */
+        private readonly array $dependencies,
+    ) {
+        $this->controller = new File($controller);
     }
 
     /**
@@ -58,5 +32,10 @@ final class Recipe
     public function jsDependencies(): array
     {
         return $this->dependencies['js'] ?? [];
+    }
+
+    public function template(): string
+    {
+        return sprintf('recipes/%s.twig', $this->name);
     }
 }

@@ -1,0 +1,16 @@
+{% block manifest %}
+title: Datepicker
+description: Flowbite datepicker.
+controller: assets/controllers/datepicker_controller.js
+dependencies:
+    js:
+        - flowbite-datepicker
+credit: https://symfonycasts.com/screencast/last-stack/flowbite
+{% endblock %}
+
+{% block demo %}
+<label>
+    Choose a Date
+    <input type="date" data-controller="datepicker" />
+</label>
+{% endblock %}

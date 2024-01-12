@@ -8,7 +8,7 @@
     <p>{{ recipe.description }}</p>
 
     {% if recipe.jsDependencies %}
-        <h2 class="text-1xl font-semibold mt-3">Dependencies</h2>
+        <h2 class="text-2xl font-semibold mt-3">Dependencies</h2>
         <div
             class="mt-1"
             data-controller="tabs"
@@ -34,20 +34,16 @@
         </div>
     {% endif %}
 
-    {% if recipe.controllerName %}
-        <h2 class="text-1xl font-semibold mt-3">Stimulus Controller</h2>
-        <p><em>{{ recipe.controllerName }}</em></p>
-        <pre class="mt-1"><code>{{ recipe.controllerSource|escape }}</code></pre>
-    {% endif %}
+    <h2 class="text-2xl font-semibold mt-3">Stimulus Controller</h2>
+    <p><em>{{ recipe.controller.name }}</em></p>
+    <pre class="mt-1"><code>{{ recipe.controller.source|escape }}</code></pre>
 
-    {% if recipe.demo %}
-        <h2 class="text-1xl font-semibold mt-3">Demo</h2>
-        <div class="mt-1">
-            {{ include(recipe.demo) }}
-        </div>
-        <h2 class="text-1xl font-semibold mt-3">Source</h2>
-        <pre class="mt-1"><code>{{ source(recipe.demo)|escape }}</code></pre>
-    {% endif %}
+    <h2 class="text-2xl font-semibold mt-3">Demo</h2>
+    <div class="mt-1">
+        {{ block('demo', recipe.template) }}
+    </div>
+    <h2 class="text-2xl font-semibold mt-3">Source</h2>
+    <pre class="mt-1"><code>{{ block('demo', recipe.template)|escape }}</code></pre>
 
     {% if recipe.credit %}
         <h2 class="text-2xl font-semibold mt-3">Credit</h2>

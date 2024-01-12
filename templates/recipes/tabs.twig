@@ -1,3 +1,11 @@
+{% block manifest %}
+title: Tabs
+description: Tabs allow showing and hiding content the currently active tab.
+controller: assets/controllers/tabs_controller.js
+credit: https://railsnotes.xyz/blog/simple-stimulus-tabs-controller
+{% endblock %}
+
+{% block demo %}
 <div
     data-controller="tabs"
     data-tabs-active-class="bg-gray-900 text-gray-100"
@@ -26,3 +34,4 @@
         </div>
     </div>
 </div>
+{% endblock %}
