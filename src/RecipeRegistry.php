@@ -65,7 +65,7 @@ final class RecipeRegistry implements \Countable, \IteratorAggregate
                     description: $manifest['description'] ?? throw new \LogicException(sprintf('Recipe "%s" is missing a description', $name)),
                     controller: $this->projectDir.'/'.($manifest['controller'] ?? throw new \LogicException(sprintf('Recipe "%s" is missing a controller', $name))),
                     credit: (array) ($manifest['credit'] ?? []),
-                    dependencies: $manifest['dependencies'] ?? [],
+                    jsDependencies: $manifest['dependencies']['js'] ?? [],
                 );
             }
 

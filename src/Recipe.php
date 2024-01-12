@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Recipe\File;
+use Symfony\Component\Serializer\Attribute\SerializedName;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
@@ -11,27 +12,21 @@ final class Recipe
 {
     public readonly File $controller;
 
+    /**
+     * @param string[] $credit
+     * @param string[] $jsDependencies
+     */
     public function __construct(
         public readonly string $name,
         public readonly string $title,
         public readonly string $description,
         string $controller,
-
-        /** @var string[] */
         public readonly array $credit,
 
-        /** @var array{js?: string[]} */
-        private readonly array $dependencies,
+        #[SerializedName('js_dependencies')]
+        public readonly array $jsDependencies,
     ) {
         $this->controller = new File($controller);
-    }
-
-    /**
-     * @return string[]
-     */
-    public function jsDependencies(): array
-    {
-        return $this->dependencies['js'] ?? [];
     }
 
     public function template(): string
