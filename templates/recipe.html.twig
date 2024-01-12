@@ -7,6 +7,33 @@
     <h1 class="text-3xl font-bold">{{ recipe.title }}</h1>
     <p>{{ recipe.description }}</p>
 
+    {% if recipe.jsDependencies %}
+        <h2 class="text-1xl font-semibold mt-3">Dependencies</h2>
+        <div
+            class="mt-1"
+            data-controller="tabs"
+            data-tabs-active-class="bg-gray-900 text-gray-100"
+            data-tabs-default-tab-value="sf-asset-mapper"
+        >
+            <div class="flex">
+                <button class="mr-2" data-target="sf-asset-mapper" data-tabs-target="btn" data-action="click->tabs#select">Symfony AssetMapper</button>
+                <button class="mr-2" data-target="npm" data-tabs-target="btn" data-action="click->tabs#select">NPM</button>
+                <button class="mr-2" data-target="yarn" data-tabs-target="btn" data-action="click->tabs#select">Yarn</button>
+            </div>
+            <div>
+                <div data-tabs-target="tab" id="sf-asset-mapper">
+                    <pre><code>bin/console importmap:require {{ recipe.jsDependencies|join(' ') }}</code></pre>
+                </div>
+                <div data-tabs-target="tab" id="npm" hidden>
+                    <pre><code>npm add {{ recipe.jsDependencies|join(' ') }}</code></pre>
+                </div>
+                <div data-tabs-target="tab" id="yarn" hidden>
+                    <pre><code>yarn add {{ recipe.jsDependencies|join(' ') }}</code></pre>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
     {% if recipe.controllerName %}
         <h2 class="text-1xl font-semibold mt-3">Stimulus Controller</h2>
         <p><em>{{ recipe.controllerName }}</em></p>

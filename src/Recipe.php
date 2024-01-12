@@ -9,6 +9,9 @@ namespace App;
  *     title: string,
  *     description: string,
  *     controller?: string,
+ *     dependencies?: array{
+ *         js?: string[],
+ *     },
  *     demo?: string,
  *     credit?: string|string[],
  *  }
@@ -22,6 +25,8 @@ final class Recipe
     /** @var string[] */
     public readonly array $credit;
 
+    /** @var array{js?: string[]} */
+    private readonly array $dependencies;
     private readonly ?string $controller;
 
     /**
@@ -34,6 +39,7 @@ final class Recipe
         $this->controller = $manifest['controller'] ?? null;
         $this->demo = $manifest['demo'] ?? null;
         $this->credit = (array) ($manifest['credit'] ?? []);
+        $this->dependencies = $manifest['dependencies'] ?? [];
     }
 
     public function controllerName(): ?string
@@ -44,5 +50,13 @@ final class Recipe
     public function controllerSource(): ?string
     {
         return $this->controller ? file_get_contents($this->controller) : null;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function jsDependencies(): array
+    {
+        return $this->dependencies['js'] ?? [];
     }
 }

@@ -6,3 +6,13 @@ parameters:
             demo: recipes/tabs_demo.html.twig
             controller: '%kernel.project_dir%/assets/controllers/tabs_controller.js'
             credit: https://railsnotes.xyz/blog/simple-stimulus-tabs-controller
+
+        datepicker:
+            title: Datepicker
+            description: Flowbite datepicker.
+            controller: '%kernel.project_dir%/assets/controllers/datepicker_controller.js'
+            demo: recipes/datepicker_demo.html.twig
+            dependencies:
+                js:
+                    - flowbite-datepicker
+            credit: https://symfonycasts.com/screencast/last-stack/flowbite

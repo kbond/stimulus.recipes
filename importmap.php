@@ -27,4 +27,7 @@ return [
     '@hotwired/turbo' => [
         'version' => '7.3.0',
     ],
+    'flowbite-datepicker' => [
+        'version' => '1.2.6',
+    ],
 ];
