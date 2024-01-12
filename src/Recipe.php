@@ -9,9 +9,7 @@ final class Recipe
 {
     public readonly string $title;
     public readonly string $description;
-
-    /** @var string[] */
-    public readonly array $tags;
+    public readonly ?string $demo;
 
     /** @var string[] */
     public readonly array $credit;
@@ -20,7 +18,7 @@ final class Recipe
      * @param array{
      *     title: string,
      *     description: string,
-     *     tags?: string[],
+     *     demo?: string,
      *     credit?: string|string[],
      * } $manifest
      */
@@ -28,7 +26,7 @@ final class Recipe
     {
         $this->title = $manifest['title'] ?? throw new \InvalidArgumentException('Missing title');
         $this->description = $manifest['description'] ?? throw new \InvalidArgumentException('Missing description');
-        $this->tags = $manifest['tags'] ?? [];
+        $this->demo = $manifest['demo'] ?? null;
         $this->credit = (array) ($manifest['credit'] ?? []);
     }
 }

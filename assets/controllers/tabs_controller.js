@@ -14,7 +14,7 @@ export default class extends Controller {
         selectedTab.hidden = false
 
         // and activate the selected button
-        let selectedBtn = this.btnTargets.find(element => element.id === this.defaultTabValue)
+        let selectedBtn = this.btnTargets.find(element => element.dataset.target === this.defaultTabValue)
         selectedBtn.classList.add(...this.activeClasses)
     }
 
@@ -22,7 +22,7 @@ export default class extends Controller {
     // add to your buttons: data-action="click->tabs#select"
     select(event) {
         // find tab matching (with same id as) the clicked btn
-        let selectedTab = this.tabTargets.find(element => element.id === event.currentTarget.id)
+        let selectedTab = this.tabTargets.find(element => element.id === event.currentTarget.dataset.target)
         if (selectedTab.hidden) {
             // hide everything
             this.tabTargets.map(x => x.hidden = true) // hide all tabs
