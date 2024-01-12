@@ -13,6 +13,18 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+    <div class="md:container md:mx-auto px-4">
+        {% block body %}
+            <header>
+                <a href="{{ path('homepage') }}">Stimulus Recipes</a>
+            </header>
+            <section class="mt-5">
+                {% block content %}{% endblock %}
+            </section>
+            <footer class="mt-5 text-center">
+                <span>&copy; <a href="https://symfony.com/">Symfony</a>. All Rights Reserved.</span>
+            </footer>
+        {% endblock %}
+    </div>
     </body>
 </html>
