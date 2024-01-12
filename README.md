@@ -6,6 +6,9 @@
 # install dependencies
 composer install
 
+# install node modules (optional but required for using tailwindcss PhpStorm plugin)
+npm install
+
 # start local server
 symfony server:start -d # auto-starts tailwind build --watch
 
