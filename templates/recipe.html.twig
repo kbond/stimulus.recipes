@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ recipe.title }}{% endblock %}
+{% block description %}{{ recipe.description }}{% endblock %}
+
+{% block content %}
+    <h1>{{ recipe.title }}</h1>
+    <p>{{ recipe.description }}</p>
+
+    {% if recipe.credit %}
+        <h2>Credit</h2>
+        <ul>
+            {% for name,url in recipe.credit %}
+                <li><a href="{{ url }}">{{ name matches '/^\\d+$/' ? url : name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

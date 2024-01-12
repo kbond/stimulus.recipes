@@ -2,16 +2,16 @@
 
 namespace App\Controller;
 
+use App\RecipeRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Contracts\Cache\CacheInterface;
 
-#[Route('/', name: 'homepage', methods: ['GET'])]
+#[Route('/', name: 'homepage', methods: 'GET')]
 class HomepageController extends AbstractController
 {
-    public function __invoke(CacheInterface $cache): Response
+    public function __invoke(RecipeRegistry $recipes): Response
     {
-        return $this->render('homepage.html.twig');
+        return $this->render('homepage.html.twig', ['recipes' => $recipes]);
     }
 }

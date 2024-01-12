@@ -4,4 +4,11 @@
 
 {% block content %}
     <a href="{{ path('getting_started') }}">Getting Started</a>
+
+    <h2>Available Recipes</h2>
+    <ul>
+        {% for recipe in recipes %}
+            <li><a href="{{ path('recipe', { 'name': recipe.name }) }}">{{ recipe.title }}</a></li>
+        {% endfor %}
+    </ul>
 {% endblock %}
