@@ -1,0 +1,8 @@
+parameters:
+    recipes:
+        tabs:
+            title: Tabs
+            description: Tabs allow showing and hiding content the currently active tab.
+            demo: recipes/tabs_demo.html.twig
+            controller: '%kernel.project_dir%/assets/controllers/tabs_controller.js'
+            credit: https://railsnotes.xyz/blog/simple-stimulus-tabs-controller

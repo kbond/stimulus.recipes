@@ -3,62 +3,43 @@
 namespace App;
 
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\Yaml\Yaml;
-use Symfony\Contracts\Cache\CacheInterface;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
  *
  * @implements \IteratorAggregate<string,Recipe>
+ *
+ * @phpstan-import-type Manifest from Recipe
  */
 final class RecipeRegistry implements \Countable, \IteratorAggregate
 {
-    /** @var Recipe[] */
+    /** @var array<string,Recipe> */
     private array $recipes;
 
+    /**
+     * @param array<string,Manifest> $config
+     */
     public function __construct(
-        #[Autowire('%kernel.project_dir%/recipes')]
-        private string $path,
-        private CacheInterface $cache,
+        #[Autowire('%recipes%')]
+        array $config,
     ) {
+        foreach ($config as $name => $manifest) {
+            $this->recipes[$name] = new Recipe($name, $manifest);
+        }
     }
 
     public function get(string $name): ?Recipe
     {
-        return $this->all()[$name] ?? null;
+        return $this->recipes[$name] ?? null;
     }
 
     public function getIterator(): \Traversable
     {
-        yield from $this->all();
+        yield from $this->recipes;
     }
 
     public function count(): int
     {
-        return \count($this->all());
-    }
-
-    /**
-     * @return array<string,Recipe>
-     */
-    public function all(): array
-    {
-        return $this->recipes ??= $this->cache->get('recipes', function () {
-            $recipes = [];
-            $files = glob($this->path.'/*.yaml') ?: throw new \RuntimeException('Unable to read recipe files.');
-
-            foreach ($files as $file) {
-                $name = basename($file, '.yaml');
-                $manifest = Yaml::parse(\file_get_contents($file) ?: throw new \RuntimeException('Unable to read recipe file.'));
-
-                if (!\is_array($manifest)) {
-                    throw new \InvalidArgumentException('Recipe must be an array');
-                }
-
-                $recipes[$name] = new Recipe($name, $manifest); // @phpstan-ignore-line
-            }
-
-            return $recipes;
-        });
+        return \count($this->recipes);
     }
 }

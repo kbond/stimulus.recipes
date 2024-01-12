@@ -4,6 +4,13 @@ namespace App;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
+ *
+ * @phpstan-type Manifest array{
+ *      title: string,
+ *      description: string,
+ *      demo?: string,
+ *      credit?: string|string[],
+ *  }
  */
 final class Recipe
 {
@@ -15,12 +22,7 @@ final class Recipe
     public readonly array $credit;
 
     /**
-     * @param array{
-     *     title: string,
-     *     description: string,
-     *     demo?: string,
-     *     credit?: string|string[],
-     * } $manifest
+     * @param Manifest $manifest
      */
     public function __construct(public readonly string $name, array $manifest)
     {
