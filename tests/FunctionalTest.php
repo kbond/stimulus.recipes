@@ -24,6 +24,20 @@ class FunctionalTest extends KernelTestCase
     /**
      * @test
      */
+    public function homepageJson(): void
+    {
+        $this->browser()
+            ->get('/', HttpOptions::json())
+            ->assertSuccessful()
+            ->json()
+                ->assertMatches("contains(recipes, 'tabs')", true)
+                ->assertMatches("contains(recipes, 'datepicker')", true)
+        ;
+    }
+
+    /**
+     * @test
+     */
     public function gettingStarted(): void
     {
         $this->browser()
@@ -70,9 +84,10 @@ class FunctionalTest extends KernelTestCase
     {
         $this->browser()
             ->get('/tabs.json')
+            ->assertSuccessful()
             ->assertJson()
             ->get('/tabs', HttpOptions::json())
-            ->assertJson()
+            ->assertSuccessful()
             ->json()
                 ->assertMatches('name', 'tabs')
                 ->assertMatches('title', 'Tabs')
@@ -84,6 +99,7 @@ class FunctionalTest extends KernelTestCase
 
         $this->browser()
             ->get('/datepicker.json')
+            ->assertSuccessful()
             ->json()
                 ->assertMatches('js_dependencies', ['flowbite-datepicker'])
         ;
