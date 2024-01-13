@@ -4,6 +4,7 @@ namespace App;
 
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DependencyInjection\Attribute\AutowireServiceClosure;
+use Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface;
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Contracts\Cache\CacheInterface;
 use Twig\Environment;
@@ -13,7 +14,7 @@ use Twig\Environment;
  *
  * @implements \IteratorAggregate<string,Recipe>
  */
-final class RecipeRegistry implements \Countable, \IteratorAggregate
+final class RecipeRegistry implements \Countable, \IteratorAggregate, CacheWarmerInterface
 {
     public function __construct(
         #[Autowire('%kernel.project_dir%')]
@@ -71,6 +72,19 @@ final class RecipeRegistry implements \Countable, \IteratorAggregate
 
             return $recipes;
         });
+    }
+
+    public function warmUp(string $cacheDir, string $buildDir = null): array
+    {
+        // warm the cache
+        $this->all();
+
+        return [];
+    }
+
+    public function isOptional(): bool
+    {
+        return true;
     }
 
     private function recipeDir(): string
