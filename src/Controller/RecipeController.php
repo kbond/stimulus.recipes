@@ -8,7 +8,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/recipe/{name}.{_format}', name: 'recipe', defaults: ['_format' => 'html'], methods: 'GET')]
+#[Route(
+    '/{name}.{_format?}',
+    name: 'recipe',
+    methods: 'GET',
+    priority: -1000,
+)]
 class RecipeController extends AbstractController
 {
     public function __invoke(Request $request, string $name, RecipeRegistry $recipes): Response
