@@ -30,4 +30,7 @@ return [
     'flowbite-datepicker' => [
         'version' => '1.2.6',
     ],
+    'stimulus-use' => [
+        'version' => '0.52.2',
+    ],
 ];
