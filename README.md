@@ -3,11 +3,8 @@
 ## Local Development
 
 ```bash
-# install dependencies
+# install dependencies (requires npm)
 composer install
-
-# install node modules (used for development)
-npm install
 
 # start local server
 symfony server:start -d # auto-starts tailwind build --watch
