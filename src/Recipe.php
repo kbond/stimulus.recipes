@@ -45,7 +45,10 @@ final class Recipe
             'php' => $manifest['dependencies']['php'] ?? [],
         ];
         $this->files = array_map(
-            static fn (string $file) => new File(sprintf('%s/%s', $projectDir, $file)),
+            static fn (string $path) => new File(
+                $path,
+                file_get_contents(sprintf('%s/%s', $projectDir, $path)) ?: throw new \RuntimeException(sprintf('Unable to read file "%s"', $path)),
+            ),
             (array) ($manifest['files'] ?? [])
         );
     }

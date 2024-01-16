@@ -7,25 +7,25 @@ namespace App\Recipe;
  */
 final class File implements \JsonSerializable
 {
-    public function __construct(private readonly string $filename)
+    public function __construct(public readonly string $path, public readonly string $source)
     {
     }
 
     public function name(): string
     {
-        return basename($this->filename);
+        return basename($this->path);
     }
 
-    public function source(): string
+    public function extension(): string
     {
-        return file_get_contents($this->filename) ?: throw new \RuntimeException(sprintf('Unable to read file "%s"', $this->filename));
+        return pathinfo($this->path, PATHINFO_EXTENSION);
     }
 
     public function jsonSerialize(): mixed
     {
         return [
-            'name' => $this->name(),
-            'source' => $this->source(),
+            'path' => $this->path,
+            'source' => $this->source,
         ];
     }
 }

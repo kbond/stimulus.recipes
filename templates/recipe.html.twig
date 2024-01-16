@@ -15,9 +15,6 @@
 
         <p class="mt-1"><em>NPM</em></p>
         <pre><code>npm add {{ recipe.dependencies.js|join(' ') }}</code></pre>
-
-        <p class="mt-1"><em>YARN</em></p>
-        <pre><code>yarn add {{ recipe.dependencies.js|join(' ') }}</code></pre>
     {% endif %}
 
     {% if recipe.dependencies.php %}
@@ -31,8 +28,8 @@
         <h2 class="text-2xl font-semibold mt-3">Files</h2>
 
         {% for file in recipe.files %}
-            <p><em>{{ file.name }}</em></p>
-            <pre class="mt-1"><code>{{ file.source|escape }}</code></pre>
+            <p class="{% if not loop.first %}mt-1{% endif %}"><em>{{ file.path }}</em></p>
+            <twig:HighlightCode :code="file.source" :language="file.extension" theme="github-dark" class="mt-1" />
         {% endfor %}
     {% endif %}
 
@@ -41,7 +38,7 @@
         {{ block('demo', recipe.template) }}
     </div>
     <h2 class="text-2xl font-semibold mt-3">Source</h2>
-    <pre class="mt-1"><code>{{ block('demo', recipe.template)|escape }}</code></pre>
+    <twig:HighlightCode :code="block('demo', recipe.template)" language="twig" theme="github-dark" class="mt-1" />
 
     {% if recipe.references %}
         <h2 class="text-2xl font-semibold mt-3">Credit</h2>

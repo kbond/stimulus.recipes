@@ -5,3 +5,7 @@
 a {
     @apply underline text-blue-900;
 }
+
+.shiki {
+    @apply p-3;
+}
