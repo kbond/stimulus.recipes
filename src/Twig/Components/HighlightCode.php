@@ -12,6 +12,10 @@ final class HighlightCode
     public string $code;
     public string $language;
     public ?string $theme = null;
+    public ?array $highlightLines = null;
+    public ?array $addLines = null;
+    public ?array $deleteLines = null;
+    public ?array $focusLines = null;
 
     public function __construct(private CacheInterface $cache)
     {
@@ -26,6 +30,10 @@ final class HighlightCode
                 code: $this->code,
                 language: $this->language,
                 theme: $this->theme,
+                highlightLines: $this->highlightLines,
+                addLines: $this->addLines,
+                deleteLines: $this->deleteLines,
+                focusLines: $this->focusLines,
             ),
         );
     }
