@@ -53,14 +53,20 @@ final class RecipeRegistry implements \Countable, \IteratorAggregate, CacheWarme
 
             foreach ($files as $file) {
                 $name = basename($file, '.twig');
-                $manifest = ($this->twig)()->load('recipes/'.basename($file))->renderBlock('manifest');
-                $manifest = Yaml::parse($manifest);
+                $template = ($this->twig)()->load('recipes/'.basename($file));
+                $source = file_get_contents($file) ?: throw new \RuntimeException(sprintf('Unable to read file "%s"', $file));
+                $manifest = Yaml::parse($template->renderBlock('manifest'));
+
+                // manually parse the demo block as you can't render the source of a block with twig
+                if (!\preg_match('#{%\s?block demo\s?%}(.+){%\s?endblock\s?%}#s', $source, $matches)) {
+                    throw new \RuntimeException(sprintf('Missing demo block for recipe "%s"', $name));
+                }
 
                 if (!is_array($manifest)) {
                     throw new \RuntimeException(sprintf('Invalid manifest for recipe "%s"', $name));
                 }
 
-                $recipes[$name] = new Recipe($name, $manifest, $this->projectDir); // @phpstan-ignore-line
+                $recipes[$name] = new Recipe($name, trim($matches[1]), $manifest, $this->projectDir); // @phpstan-ignore-line
             }
 
             return $recipes;

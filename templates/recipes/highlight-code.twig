@@ -5,7 +5,7 @@ files:
     - src/Twig/Components/HighlightCode.php
     - templates/components/HighlightCode.html.twig
 dependencies:
-    npm:
+    node:
         - shiki
     php:
         - symfony/ux-twig-component
@@ -16,5 +16,5 @@ references:
 {% endblock %}
 
 {% block demo %}
-    <twig:HighlightCode code="echo sprintf('Hello %s!', $name);" language="php" theme="github-light" />
+<twig:HighlightCode code="echo sprintf('Hello %s!', $name);" language="php" theme="github-light" />
 {% endblock %}

@@ -94,7 +94,7 @@ class FunctionalTest extends KernelTestCase
                 ->assertMatches('description', 'Tabs allow showing and hiding content the currently active tab.')
                 ->assertMatches('dependencies.php', ['symfony/ux-twig-component'])
                 ->assertMatches('references', ['https://railsnotes.xyz/blog/simple-stimulus-tabs-controller', 'https://flowbite.com/docs/components/tabs/'])
-                ->assertMatches('files[0].name', 'tabs_controller.js')
+                ->assertMatches('files[0].path', 'assets/controllers/tabs_controller.js')
                 ->assertHas('files[0].source')
         ;
 

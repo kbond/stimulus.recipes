@@ -14,7 +14,6 @@ use App\Recipe\File;
  *     dependencies?: array{
  *          js?: string[],
  *          node?: string[],
- *          asset_mapper?: string[],
  *          php?: string[],
  *     },
  *     files?: string|string[],
@@ -28,7 +27,7 @@ final class Recipe
     /** @var string[] */
     public readonly array $references;
 
-    /** @var array{npm: string[], asset_mapper: string[], php: string[]} */
+    /** @var array{node: string[], js: string[], php: string[]} */
     public readonly array $dependencies;
 
     /** @var File[] */
@@ -37,14 +36,14 @@ final class Recipe
     /**
      * @param Manifest $manifest
      */
-    public function __construct(public readonly string $name, array $manifest, string $projectDir)
+    public function __construct(public readonly string $name, public readonly string $demo, array $manifest, string $projectDir)
     {
         $this->title = $manifest['title'] ?? throw new \LogicException(sprintf('Missing title for recipe "%s"', $name));
         $this->description = $manifest['description'] ?? throw new \LogicException(sprintf('Missing description for recipe "%s"', $name));
         $this->references = (array) ($manifest['references'] ?? []);
         $this->dependencies = [
-            'npm' => $manifest['dependencies']['npm'] ?? $manifest['dependencies']['js'] ?? [],
-            'asset_mapper' => $manifest['dependencies']['asset_mapper'] ?? $manifest['dependencies']['js'] ?? [],
+            'node' => $manifest['dependencies']['node'] ?? [],
+            'js' => $manifest['dependencies']['js'] ?? [],
             'php' => $manifest['dependencies']['php'] ?? [],
         ];
         $this->files = array_map(
@@ -54,11 +53,6 @@ final class Recipe
             ),
             (array) ($manifest['files'] ?? [])
         );
-    }
-
-    public function hasJsDependencies(): bool
-    {
-        return $this->dependencies['npm'] || $this->dependencies['asset_mapper'];
     }
 
     public function template(): string
