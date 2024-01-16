@@ -13,6 +13,8 @@ use App\Recipe\File;
  *     credit?: string|string[],
  *     dependencies?: array{
  *          js?: string[],
+ *          node?: string[],
+ *          asset_mapper?: string[],
  *          php?: string[],
  *     },
  *     files?: string|string[],
@@ -26,7 +28,7 @@ final class Recipe
     /** @var string[] */
     public readonly array $references;
 
-    /** @var array{js: string[], php: string[]} */
+    /** @var array{npm: string[], asset_mapper: string[], php: string[]} */
     public readonly array $dependencies;
 
     /** @var File[] */
@@ -41,7 +43,8 @@ final class Recipe
         $this->description = $manifest['description'] ?? throw new \LogicException(sprintf('Missing description for recipe "%s"', $name));
         $this->references = (array) ($manifest['references'] ?? []);
         $this->dependencies = [
-            'js' => $manifest['dependencies']['js'] ?? [],
+            'npm' => $manifest['dependencies']['npm'] ?? $manifest['dependencies']['js'] ?? [],
+            'asset_mapper' => $manifest['dependencies']['asset_mapper'] ?? $manifest['dependencies']['js'] ?? [],
             'php' => $manifest['dependencies']['php'] ?? [],
         ];
         $this->files = array_map(
@@ -51,6 +54,11 @@ final class Recipe
             ),
             (array) ($manifest['files'] ?? [])
         );
+    }
+
+    public function hasJsDependencies(): bool
+    {
+        return $this->dependencies['npm'] || $this->dependencies['asset_mapper'];
     }
 
     public function template(): string
