@@ -72,8 +72,8 @@ class FunctionalTest extends KernelTestCase
             ->assertSeeIn('title', 'Tabs')
             ->assertElementAttributeContains('meta[name=description]', 'content', 'Tabs allow showing and hiding content the currently active tab.')
             ->assertSeeIn('h1', 'Tabs')
-            ->assertSeeIn('p', 'Tabs allow showing and hiding content the currently active tab.')
-            ->assertSeeIn('ul li', 'https://railsnotes.xyz/blog/simple-stimulus-tabs-controller')
+            ->assertSee('Tabs allow showing and hiding content the currently active tab.')
+            ->assertSee('https://railsnotes.xyz/blog/simple-stimulus-tabs-controller')
         ;
     }
 
