@@ -3,30 +3,51 @@
 namespace App;
 
 use App\Recipe\File;
-use Symfony\Component\Serializer\Attribute\SerializedName;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
+ *
+ * @phpstan-type Manifest array{
+ *     title: string,
+ *     description: string,
+ *     credit?: string|string[],
+ *     dependencies?: array{
+ *          js?: string[],
+ *          php?: string[],
+ *     },
+ *     files?: string|string[],
+ * }
  */
 final class Recipe
 {
-    public readonly File $controller;
+    public readonly string $title;
+    public readonly string $description;
+
+    /** @var string[] */
+    public readonly array $references;
+
+    /** @var array{js: string[], php: string[]} */
+    public readonly array $dependencies;
+
+    /** @var File[] */
+    public array $files;
 
     /**
-     * @param string[] $credit
-     * @param string[] $jsDependencies
+     * @param Manifest $manifest
      */
-    public function __construct(
-        public readonly string $name,
-        public readonly string $title,
-        public readonly string $description,
-        string $controller,
-        public readonly array $credit,
-
-        #[SerializedName('js_dependencies')]
-        public readonly array $jsDependencies,
-    ) {
-        $this->controller = new File($controller);
+    public function __construct(public readonly string $name, array $manifest, string $projectDir)
+    {
+        $this->title = $manifest['title'] ?? throw new \LogicException(sprintf('Missing title for recipe "%s"', $name));
+        $this->description = $manifest['description'] ?? throw new \LogicException(sprintf('Missing description for recipe "%s"', $name));
+        $this->references = (array) ($manifest['references'] ?? []);
+        $this->dependencies = [
+            'js' => $manifest['dependencies']['js'] ?? [],
+            'php' => $manifest['dependencies']['php'] ?? [],
+        ];
+        $this->files = array_map(
+            static fn (string $file) => new File(sprintf('%s/%s', $projectDir, $file)),
+            (array) ($manifest['files'] ?? [])
+        );
     }
 
     public function template(): string

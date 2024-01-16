@@ -92,16 +92,17 @@ class FunctionalTest extends KernelTestCase
                 ->assertMatches('name', 'tabs')
                 ->assertMatches('title', 'Tabs')
                 ->assertMatches('description', 'Tabs allow showing and hiding content the currently active tab.')
-                ->assertMatches('credit', ['https://railsnotes.xyz/blog/simple-stimulus-tabs-controller'])
-                ->assertMatches('controller.name', 'tabs_controller.js')
-                ->assertHas('controller.source')
+                ->assertMatches('dependencies.php', ['symfony/ux-twig-component'])
+                ->assertMatches('references', ['https://railsnotes.xyz/blog/simple-stimulus-tabs-controller', 'https://flowbite.com/docs/components/tabs/'])
+                ->assertMatches('files[0].name', 'tabs_controller.js')
+                ->assertHas('files[0].source')
         ;
 
         $this->browser()
             ->get('/datepicker.json')
             ->assertSuccessful()
             ->json()
-                ->assertMatches('js_dependencies', ['flowbite-datepicker'])
+                ->assertMatches('dependencies.js', ['flowbite-datepicker'])
         ;
     }
 }

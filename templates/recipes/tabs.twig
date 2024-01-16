@@ -1,8 +1,14 @@
 {% block manifest %}
 title: Tabs
 description: Tabs allow showing and hiding content the currently active tab.
-controller: assets/controllers/tabs_controller.js
-credit: https://railsnotes.xyz/blog/simple-stimulus-tabs-controller
+files:
+    - assets/controllers/tabs_controller.js
+dependencies:
+    php:
+        - symfony/ux-twig-component
+references:
+    - https://railsnotes.xyz/blog/simple-stimulus-tabs-controller
+    - https://flowbite.com/docs/components/tabs/
 {% endblock %}
 
 {% block demo %}

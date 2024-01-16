@@ -7,36 +7,34 @@
     <h1 class="text-3xl font-bold">{{ recipe.title }}</h1>
     <p>{{ recipe.description }}</p>
 
-    {% if recipe.jsDependencies %}
-        <h2 class="text-2xl font-semibold mt-3">Dependencies</h2>
-        <div
-            class="mt-1"
-            data-controller="tabs"
-            data-tabs-active-class="bg-gray-900 text-gray-100"
-            data-tabs-default-tab-value="sf-asset-mapper"
-        >
-            <div class="flex">
-                <button class="mr-2" data-target="sf-asset-mapper" data-tabs-target="btn" data-action="click->tabs#select">Symfony AssetMapper</button>
-                <button class="mr-2" data-target="npm" data-tabs-target="btn" data-action="click->tabs#select">NPM</button>
-                <button class="mr-2" data-target="yarn" data-tabs-target="btn" data-action="click->tabs#select">Yarn</button>
-            </div>
-            <div>
-                <div data-tabs-target="tab" id="sf-asset-mapper">
-                    <pre><code>bin/console importmap:require {{ recipe.jsDependencies|join(' ') }}</code></pre>
-                </div>
-                <div data-tabs-target="tab" id="npm" hidden>
-                    <pre><code>npm add {{ recipe.jsDependencies|join(' ') }}</code></pre>
-                </div>
-                <div data-tabs-target="tab" id="yarn" hidden>
-                    <pre><code>yarn add {{ recipe.jsDependencies|join(' ') }}</code></pre>
-                </div>
-            </div>
+    {% if recipe.dependencies.js %}
+        <h2 class="text-2xl font-semibold mt-3">JS Dependencies</h2>
+
+        <p><em>Symfony AssetMapper</em></p>
+        <pre><code>bin/console importmap:require {{ recipe.dependencies.js|join(' ') }}</code></pre>
+
+        <p class="mt-1"><em>NPM</em></p>
+        <pre><code>npm add {{ recipe.dependencies.js|join(' ') }}</code></pre>
+
+        <p class="mt-1"><em>YARN</em></p>
+        <pre><code>yarn add {{ recipe.dependencies.js|join(' ') }}</code></pre>
+    {% endif %}
+
+    {% if recipe.dependencies.php %}
+        <h2 class="text-2xl font-semibold mt-3">PHP Dependencies</h2>
+        <div>
+            <pre><code>composer require {{ recipe.dependencies.php|join(' ') }}</code></pre>
         </div>
     {% endif %}
 
-    <h2 class="text-2xl font-semibold mt-3">Stimulus Controller</h2>
-    <p><em>{{ recipe.controller.name }}</em></p>
-    <pre class="mt-1"><code>{{ recipe.controller.source|escape }}</code></pre>
+    {% if recipe.files %}
+        <h2 class="text-2xl font-semibold mt-3">Files</h2>
+
+        {% for file in recipe.files %}
+            <p><em>{{ file.name }}</em></p>
+            <pre class="mt-1"><code>{{ file.source|escape }}</code></pre>
+        {% endfor %}
+    {% endif %}
 
     <h2 class="text-2xl font-semibold mt-3">Demo</h2>
     <div class="mt-1">
@@ -45,10 +43,10 @@
     <h2 class="text-2xl font-semibold mt-3">Source</h2>
     <pre class="mt-1"><code>{{ block('demo', recipe.template)|escape }}</code></pre>
 
-    {% if recipe.credit %}
+    {% if recipe.references %}
         <h2 class="text-2xl font-semibold mt-3">Credit</h2>
         <ul>
-            {% for name,url in recipe.credit %}
+            {% for name,url in recipe.references %}
                 <li><a href="{{ url }}">{{ name matches '/^\\d+$/' ? url : name }}</a></li>
             {% endfor %}
         </ul>

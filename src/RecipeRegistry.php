@@ -60,14 +60,7 @@ final class RecipeRegistry implements \Countable, \IteratorAggregate, CacheWarme
                     throw new \RuntimeException(sprintf('Invalid manifest for recipe "%s"', $name));
                 }
 
-                $recipes[$name] = new Recipe(
-                    name: $name,
-                    title: $manifest['title'] ?? throw new \LogicException(sprintf('Recipe "%s" is missing a title', $name)),
-                    description: $manifest['description'] ?? throw new \LogicException(sprintf('Recipe "%s" is missing a description', $name)),
-                    controller: $this->projectDir.'/'.($manifest['controller'] ?? throw new \LogicException(sprintf('Recipe "%s" is missing a controller', $name))),
-                    credit: (array) ($manifest['credit'] ?? []),
-                    jsDependencies: $manifest['dependencies']['js'] ?? [],
-                );
+                $recipes[$name] = new Recipe($name, $manifest, $this->projectDir); // @phpstan-ignore-line
             }
 
             return $recipes;
