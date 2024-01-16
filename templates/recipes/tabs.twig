@@ -3,6 +3,7 @@ title: Tabs
 description: Tabs allow showing and hiding content the currently active tab.
 files:
     - assets/controllers/tabs_controller.js
+    - assets/styles/tabs.css
 dependencies:
     php:
         - symfony/ux-twig-component
@@ -12,32 +13,26 @@ references:
 {% endblock %}
 
 {% block demo %}
-<div
-    data-controller="tabs"
-    data-tabs-active-class="bg-gray-900 text-gray-100"
-    data-tabs-default-tab-value="tab1"
->
-    <!-- buttons to toggle between tabs -->
-    <div class="flex">
-        <button data-target="tab1" data-tabs-target="btn" data-action="click->tabs#select">Tab1</button>
-        <button data-target="tab2" data-tabs-target="btn" data-action="click->tabs#select">Tab2</button>
-        <button data-target="tab3" data-tabs-target="btn" data-action="click->tabs#select">Tab3</button>
-    </div>
+<twig:Tabs>
+    <twig:block name="buttons">
+        <twig:Tabs:Tab id="profile" default>Profile</twig:Tabs:Tab>
+        <twig:Tabs:Tab id="dashboard">Dashboard</twig:Tabs:Tab>
+        <twig:Tabs:Tab id="settings">Settings</twig:Tabs:Tab>
+        <twig:Tabs:Tab id="contact">Contact</twig:Tabs:Tab>
+    </twig:block>
 
-    <!-- the tabs -->
-    <div>
-        <div data-tabs-target="tab" id="tab1">
-            Tab 1 content
-        </div>
+    <twig:Tabs:Panel id="profile" default>
+        <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+    </twig:Tabs:Panel>
+    <twig:Tabs:Panel id="dashboard">
+        <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Dashboard tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+    </twig:Tabs:Panel>
+    <twig:Tabs:Panel id="settings">
+        <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Settings tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+    </twig:Tabs:Panel>
+    <twig:Tabs:Panel id="contact">
+        <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Contacts tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+    </twig:Tabs:Panel>
 
-        <!-- tab 2 and 3 are hidden by default, to prevent 'flashing in' -->
-        <div data-tabs-target="tab" id="tab2" hidden>
-            Tab 2 content
-        </div>
-
-        <div data-tabs-target="tab" id="tab3" hidden>
-            Tab 3 content
-        </div>
-    </div>
-</div>
+</twig:Tabs>
 {% endblock %}

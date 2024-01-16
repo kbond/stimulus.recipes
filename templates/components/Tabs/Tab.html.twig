@@ -1,0 +1,17 @@
+{% props id, default = false %}
+
+<li{{ attributes.defaults({
+    role: 'presentation'
+}) }}>
+    <button
+        data-action="click->tabs#select"
+        data-tabs-target="tab"
+        id="{{ id }}-tab"
+        type="button"
+        role="tab"
+        aria-controls="{{ id }}"
+        aria-selected="{{ default ? 'true' : 'false' }}"
+    >
+        {% block content %}{% endblock %}
+    </button>
+</li>

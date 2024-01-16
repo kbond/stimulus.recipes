@@ -1,0 +1,9 @@
+<div{{ attributes.defaults({
+    'data-controller': 'tabs'
+}) }}>
+    <ul class="ui-tab-list" role="tablist">
+        {% block buttons %}{% endblock %}
+    </ul>
+
+    {% block content %}{% endblock %}
+</div>

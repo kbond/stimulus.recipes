@@ -1,0 +1,12 @@
+.ui-tab-list {
+    @apply flex flex-wrap text-sm font-medium text-center;
+}
+.ui-tab-list li {
+    @apply me-2;
+}
+.ui-tab-list li button {
+    @apply inline-block p-4 border-b-2 hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 aria-selected:text-blue-600 aria-selected:border-blue-600 aria-selected:dark:text-blue-500 aria-selected:dark:border-blue-500;
+}
+.ui-tab-panel {
+    @apply p-4 border rounded-b-lg border-gray-200 dark:border-gray-700 -mt-px;
+}

@@ -1,0 +1,11 @@
+{% props id, default = false %}
+<div{{ attributes.defaults({
+    'data-tabs-target': 'panel',
+    class: 'ui-tab-panel',
+    id: id,
+    role: 'tabpanel',
+    'aria-labelledby': id ~ '-tab',
+    hidden: not default,
+}) }}>
+    {% block content %}{% endblock %}
+</div>
