@@ -1,0 +1,34 @@
+{% block manifest %}
+title: Tooltip
+description: Tooltip twig component.
+files:
+    - assets/controllers/tooltip_controller.js
+    - assets/styles/tooltip.css
+dependencies:
+    js: '@popperjs/core'
+references:
+    - https://www.stimulus-components.com/docs/stimulus-popover
+    - https://flowbite.com/docs/components/tooltips/
+    - https://dev.to/spaquet/rails-popper-tailwind-stimulus-1koi
+{% endblock %}
+
+{% block demo %}
+<button data-controller="tooltip" data-action="mouseenter->tooltip#show mouseleave->tooltip#hide" data-tooltip-content-value="Top Tooltip" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+    Top
+</button>
+<button data-controller="tooltip" data-action="mouseenter->tooltip#show mouseleave->tooltip#hide" data-tooltip-content-value="Right Tooltip" data-tooltip-placement-value="right" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+    Right
+</button>
+<button data-controller="tooltip" data-action="mouseenter->tooltip#show mouseleave->tooltip#hide" data-tooltip-content-value="Bottom Tooltip" data-tooltip-placement-value="bottom" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+    Bottom
+</button>
+<button data-controller="tooltip" data-action="mouseenter->tooltip#show mouseleave->tooltip#hide" data-tooltip-content-value="Left Tooltip" data-tooltip-placement-value="left" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+    Left
+</button>
+<button data-controller="tooltip" data-action="click->tooltip#toggle" data-tooltip-content-value="Tooltip" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+    Click to toggle
+</button>
+<button data-controller="tooltip" data-action="click->tooltip#show" data-tooltip-hide-after-param="2000" data-tooltip-content-value="Tooltip" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+    Click to show, auto hide after 2s
+</button>
+{% endblock %}

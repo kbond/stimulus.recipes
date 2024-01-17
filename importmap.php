@@ -30,4 +30,7 @@ return [
     'flowbite-datepicker' => [
         'version' => '1.2.6',
     ],
+    '@popperjs/core' => [
+        'version' => '2.11.8',
+    ],
 ];
