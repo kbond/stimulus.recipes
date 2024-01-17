@@ -15,6 +15,7 @@ use App\Recipe\File;
  *          js?: string[],
  *          node?: string[],
  *          php?: string[],
+ *          recipes?: string[],
  *     },
  *     files?: string|string[],
  * }
@@ -27,7 +28,7 @@ final class Recipe
     /** @var string[] */
     public readonly array $references;
 
-    /** @var array{node: string[], js: string[], php: string[]} */
+    /** @var array{node: string[], js: string[], php: string[], recipes: string[]} */
     public readonly array $dependencies;
 
     /** @var File[] */
@@ -45,6 +46,7 @@ final class Recipe
             'node' => $manifest['dependencies']['node'] ?? [],
             'js' => $manifest['dependencies']['js'] ?? [],
             'php' => $manifest['dependencies']['php'] ?? [],
+            'recipes' => $manifest['dependencies']['recipes'] ?? [],
         ];
         $this->files = array_map(
             static fn (string $path) => new File(

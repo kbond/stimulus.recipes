@@ -7,6 +7,17 @@
     <h1 class="text-3xl font-bold">{{ recipe.title }}</h1>
     <p>{{ recipe.description }}</p>
 
+    {% if recipe.dependencies.recipes %}
+        <h2 class="text-2xl font-semibold mt-3">Required Recipes</h2>
+
+        <p><em>The following recipes are required:</em></p>
+        <ul>
+            {% for recipe in recipe.dependencies.recipes %}
+                <li><a href="{{ path('recipe', {name: recipe}) }}">{{ recipe }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     {% if recipe.dependencies.js %}
         <h2 class="text-2xl font-semibold mt-3">JS Dependencies</h2>
 

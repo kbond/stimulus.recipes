@@ -1,8 +1,10 @@
 {% block manifest %}
 title: Alert
 description: Alert with optional close button.
+dependencies:
+    recipes:
+        - closable
 files:
-    - assets/controllers/closeable_controller.js
     - assets/styles/alert.css
     - templates/components/Alert.html.twig
 references:
