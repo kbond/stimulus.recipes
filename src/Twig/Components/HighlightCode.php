@@ -12,9 +12,17 @@ final class HighlightCode
     public string $code;
     public string $language;
     public ?string $theme = null;
+
+    /** @var list<int>|null */
     public ?array $highlightLines = null;
+
+    /** @var list<int>|null */
     public ?array $addLines = null;
+
+    /** @var list<int>|null */
     public ?array $deleteLines = null;
+
+    /** @var list<int>|null */
     public ?array $focusLines = null;
 
     public function __construct(private CacheInterface $cache)
