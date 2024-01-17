@@ -20,7 +20,9 @@
     {% if recipe.dependencies.node %}
         <h2 class="text-2xl font-semibold mt-3">Node.js Dependencies</h2>
 
-        <p>WARNING: This recipe requires node.js.</p>
+        <twig:Alert type="warning" class="mt-1">
+            This recipe requires the following dependencies be installed with Node.js.
+        </twig:Alert>
 
         <p><em>NPM</em></p>
         <pre><code>npm add {{ recipe.dependencies.node|join(' ') }}</code></pre>
