@@ -1,0 +1,52 @@
+{% block manifest %}
+title: Alert
+description: Alert with optional close button.
+files:
+    - assets/controllers/closable_controller.js
+    - assets/styles/alert.css
+    - templates/components/Alert.html.twig
+references:
+    - https://flowbite.com/docs/components/alerts/
+{% endblock %}
+
+{% block demo %}
+<twig:Alert type="info" class="mb-4">
+    Info type
+</twig:Alert>
+
+<twig:Alert type="success" class="mb-4">
+    Success type
+</twig:Alert>
+
+<twig:Alert type="warning" class="mb-4">
+    Warning type
+</twig:Alert>
+
+<twig:Alert type="danger" class="mb-4">
+    Danger type
+</twig:Alert>
+
+<twig:Alert class="mb-4">
+    Default type
+</twig:Alert>
+
+<twig:Alert closable type="info" class="mb-4">
+    Closable Info type
+</twig:Alert>
+
+<twig:Alert closable type="success" class="mb-4">
+    Closable Success type
+</twig:Alert>
+
+<twig:Alert closable type="warning" class="mb-4">
+    Closable Warning type
+</twig:Alert>
+
+<twig:Alert closable type="danger" class="mb-4">
+    Closable Danger type
+</twig:Alert>
+
+<twig:Alert closable class="mb-4">
+    Closable Default type
+</twig:Alert>
+{% endblock %}

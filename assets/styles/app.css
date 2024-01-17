@@ -1,5 +1,6 @@
 @import 'tabs.css';
 @import 'highlight-code.css';
+@import 'alert.css';
 
 @tailwind base;
 @tailwind components;
