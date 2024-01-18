@@ -20,5 +20,14 @@ references:
 {% endblock %}
 
 {% block demo %}
-<twig:HighlightCode code="echo sprintf('Hello %s!', $name);" language="php" theme="monokai" />
+<twig:HighlightCode
+    code="echo sprintf('Hello %s!', $name); // this is passed as the code attribute"
+    language="php"
+    theme="monokai"
+    class="mb-4"
+/>
+
+<twig:HighlightCode language="php" theme="monokai">
+    echo sprintf('Hello %s!', $name); // this is passed as the content block
+</twig:HighlightCode>
 {% endblock %}
