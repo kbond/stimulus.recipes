@@ -18,8 +18,18 @@
             <header>
                 <a href="{{ path('homepage') }}">Stimulus Recipes</a>
             </header>
-            <section class="mt-5">
-                {% block content %}{% endblock %}
+            <section class="mt-5 flex">
+                <div class="w-1/5">
+                    <h2>Available Recipes</h2>
+                    <ul>
+                        {% for recipe in recipes %}
+                            <li><a href="{{ path('recipe', { 'name': recipe.name }) }}">{{ recipe.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="w-4/5">
+                    {% block content %}{% endblock %}
+                </div>
             </section>
             <footer class="mt-5 text-center">
                 <span>&copy; <a href="https://symfony.com/">Symfony</a>. All Rights Reserved.</span>

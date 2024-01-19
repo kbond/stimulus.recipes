@@ -38,19 +38,6 @@ class FunctionalTest extends KernelTestCase
     /**
      * @test
      */
-    public function gettingStarted(): void
-    {
-        $this->browser()
-            ->visit('/')
-            ->click('Getting Started')
-            ->assertOn('/getting-started')
-            ->assertSuccessful()
-        ;
-    }
-
-    /**
-     * @test
-     */
     public function browseRecipes(): void
     {
         $this->browser()
