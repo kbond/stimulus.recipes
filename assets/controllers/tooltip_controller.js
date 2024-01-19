@@ -67,8 +67,8 @@ export default class extends Controller {
         this.hidden = true;
     }
 
-    toggle() {
-        this.hidden ? this.show() : this.hide();
+    toggle(event) {
+        this.hidden ? this.show(event) : this.hide(event);
     }
 }
 
