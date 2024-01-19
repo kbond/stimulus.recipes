@@ -19,6 +19,10 @@ final class RecipeRegistry implements \Countable, \IteratorAggregate, CacheWarme
     public function __construct(
         #[Autowire('%kernel.project_dir%')]
         private string $projectDir,
+
+        #[Autowire('%kernel.debug%')]
+        private bool $debug,
+
         private CacheInterface $cache,
 
         /** @var \Closure():Environment */
@@ -47,30 +51,34 @@ final class RecipeRegistry implements \Countable, \IteratorAggregate, CacheWarme
      */
     public function all(): array
     {
-        return $this->cache->get('recipes', function () {
-            $recipes = [];
-            $files = glob($this->recipeDir().'/*.twig') ?: throw new \LogicException('No recipes found');
+        return $this->cache->get(
+            key: 'recipes',
+            callback: function () {
+                $recipes = [];
+                $files = glob($this->recipeDir().'/*.twig') ?: throw new \LogicException('No recipes found');
 
-            foreach ($files as $file) {
-                $name = basename($file, '.twig');
-                $template = ($this->twig)()->load('recipes/'.basename($file));
-                $source = file_get_contents($file) ?: throw new \RuntimeException(sprintf('Unable to read file "%s"', $file));
-                $manifest = Yaml::parse($template->renderBlock('manifest'));
+                foreach ($files as $file) {
+                    $name = basename($file, '.twig');
+                    $template = ($this->twig)()->load('recipes/'.basename($file));
+                    $source = file_get_contents($file) ?: throw new \RuntimeException(sprintf('Unable to read file "%s"', $file));
+                    $manifest = Yaml::parse($template->renderBlock('manifest'));
 
-                // manually parse the demo block as you can't render the source of a block with twig
-                if (!\preg_match('#{%\s?block demo\s?%}(.+){%\s?endblock\s?%}#s', $source, $matches)) {
-                    throw new \RuntimeException(sprintf('Missing demo block for recipe "%s"', $name));
+                    // manually parse the demo block as you can't render the source of a block with twig
+                    if (!\preg_match('#{%\s?block demo\s?%}(.+){%\s?endblock\s?%}#s', $source, $matches)) {
+                        throw new \RuntimeException(sprintf('Missing demo block for recipe "%s"', $name));
+                    }
+
+                    if (!is_array($manifest)) {
+                        throw new \RuntimeException(sprintf('Invalid manifest for recipe "%s"', $name));
+                    }
+
+                    $recipes[$name] = new Recipe($name, trim($matches[1]), $manifest, $this->projectDir); // @phpstan-ignore-line
                 }
 
-                if (!is_array($manifest)) {
-                    throw new \RuntimeException(sprintf('Invalid manifest for recipe "%s"', $name));
-                }
-
-                $recipes[$name] = new Recipe($name, trim($matches[1]), $manifest, $this->projectDir); // @phpstan-ignore-line
-            }
-
-            return $recipes;
-        });
+                return $recipes;
+            },
+            beta: $this->debug ? INF : null
+        );
     }
 
     public function warmUp(string $cacheDir, string $buildDir = null): array
