@@ -2,6 +2,7 @@
 @import 'highlight-code.css';
 @import 'alert.css';
 @import 'tooltip.css';
+@import 'button.css';
 
 @tailwind base;
 @tailwind components;

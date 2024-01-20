@@ -1,0 +1,8 @@
+{% props alt = null, green = null, red = null, yellow = null %}
+
+<button{{ attributes.defaults({
+    type: 'button',
+    class: 'ui-button ui-button-' ~ (alt ? 'alt' : green ? 'green' : red ? 'red' : yellow ? 'yellow' : 'default'),
+}) }}>
+    {% block content %}{% endblock %}
+</button>
