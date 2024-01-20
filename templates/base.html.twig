@@ -22,8 +22,14 @@
                 <div class="w-1/5">
                     <h2>Available Recipes</h2>
                     <ul>
-                        {% for recipe in recipes %}
-                            <li><a href="{{ path('recipe', { 'name': recipe.name }) }}">{{ recipe.title }}</a></li>
+                        {% for item in recipes %}
+                            <li>
+                                {% if item.name == recipe.name|default %}
+                                    <strong>{{ item.title }}</strong>
+                                {% else %}
+                                    <a href="{{ path('recipe', { 'name': item.name }) }}">{{ item.title }}</a>
+                                {% endif %}
+                            </li>
                         {% endfor %}
                     </ul>
                 </div>
