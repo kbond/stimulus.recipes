@@ -2,6 +2,8 @@
 
 namespace App\Tests;
 
+use App\Recipe;
+use App\RecipeRegistry;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Browser\HttpOptions;
 use Zenstruck\Browser\Test\HasBrowser;
@@ -91,5 +93,23 @@ class FunctionalTest extends KernelTestCase
             ->json()
                 ->assertMatches('dependencies.js', ['flowbite-datepicker'])
         ;
+    }
+
+    /**
+     * @test
+     */
+    public function allRecipesWork(): void
+    {
+        foreach (self::getContainer()->get(RecipeRegistry::class) as $recipe) {
+            /** @var Recipe $recipe */
+            $this->browser()
+                ->throwExceptions()
+                ->visit("/{$recipe->name}")
+                ->assertSuccessful()
+                ->assertSeeIn('h1', $recipe->title)
+                ->get("/{$recipe->name}.json")
+                ->assertJsonMatches('title', $recipe->title)
+            ;
+        }
     }
 }
