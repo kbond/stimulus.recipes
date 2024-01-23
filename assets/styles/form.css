@@ -1,0 +1,75 @@
+.ui-form-row {
+    @apply mb-5;
+}
+
+.ui-form-label {
+    @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
+}
+
+.ui-form-help {
+    @apply mt-1 w-full text-sm text-gray-500 dark:text-gray-400;
+}
+
+.ui-form-errors {
+    @apply w-full;
+}
+
+.ui-form-error {
+    @apply mt-1 text-sm text-red-600 dark:text-red-500;
+}
+
+.ui-form-row:has(> input.ui-form-widget[type="checkbox"]),
+.ui-form-row:has(> input.ui-form-widget[type="radio"]) {
+    @apply flex items-center flex-wrap;
+
+    .ui-form-label {
+        @apply mb-0 ms-2;
+    }
+
+    .ui-form-help, .ui-form-errors {
+        @apply ml-6;
+    }
+
+    .ui-form-help {
+        @apply mt-0 text-xs;
+    }
+}
+
+input.ui-form-widget:not([type="checkbox"]):not([type="radio"]),
+select.ui-form-widget,
+textarea.ui-form-widget {
+    @apply block w-full;
+}
+
+input.ui-form-widget[type="checkbox"],
+input.ui-form-widget[type="radio"] {
+    @apply order-first;
+}
+
+.ui-form-row-choice .ui-form-row {
+    @apply mb-2 last:mb-0;
+}
+
+.ui-form-row.is-valid {
+    .ui-form-label {
+        @apply text-green-700 dark:text-green-500;
+    }
+
+    input.ui-form-widget:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+    select.ui-form-widget,
+    textarea.ui-form-widget {
+        @apply bg-green-50 border-green-500 text-green-900 focus:ring-green-500 focus:border-green-500 dark:bg-green-100 dark:border-green-400;
+    }
+}
+
+.ui-form-row.has-error {
+    .ui-form-label {
+        @apply text-red-700 dark:text-red-500;
+    }
+
+    input.ui-form-widget:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+    select.ui-form-widget,
+    textarea.ui-form-widget {
+        @apply bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500 dark:bg-red-100 dark:border-red-400;
+    }
+}

@@ -1,0 +1,8 @@
+{% props field = null, type = 'text' %}
+
+<input{{ attributes.defaults({
+    type: type,
+    value: field.vars.value|default(false),
+    checked: field.vars.checked|default(false),
+    class: 'ui-form-widget',
+}) }}/>

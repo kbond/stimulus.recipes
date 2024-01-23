@@ -50,8 +50,8 @@
         <h2 class="text-2xl font-semibold mt-3">Files</h2>
 
         {% for file in recipe.files %}
-            <p class="{% if not loop.first %}mt-1{% endif %}"><em>{{ file.path }}</em></p>
-            <twig:HighlightCode :code="file.source" :language="file.extension" theme="github-dark" class="mt-1" />
+            <p><em>{{ file.path }}</em></p>
+            <twig:HighlightCode :code="file.source" :language="file.extension" theme="github-dark" class="mb-3" />
         {% endfor %}
     {% endif %}
 

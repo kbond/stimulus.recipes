@@ -1,0 +1,67 @@
+{% set compound = field.vars.compound|default(false) %}
+{% set tag = compound ? 'fieldset' : 'div' %}
+
+<{{ tag }}{{ attributes.defaults({
+    class: html_classes(
+        'ui-form-row',
+        type ? 'ui-form-row-'~type,
+        {
+            'is-valid': isValid,
+            'has-error': hasErrors,
+        },
+    ),
+    hidden: 'hidden' == type,
+}) }}>
+    {% block content %}
+        {% set label = field.vars.label ? field.vars.label : field.vars.name|humanize %}
+        {% set help = field.vars.help|default %}
+
+        {% block label %}
+            {% if compound %}
+                <legend class="ui-form-label">{{ label }}</legend>
+            {% elseif type not in ['button', 'submit', 'hidden'] %}
+                <twig:Form:Label :field="field">{{ label }}</twig:Form:Label>
+            {% endif %}
+        {% endblock %}
+
+        {% block widget %}
+            {% set widgetAttr = {
+                id: field.vars.id|default(false),
+                name: field.vars.full_name|default(false),
+                disabled: field.vars.disabled|default(false),
+                required: field.vars.required|default(false),
+                'aria-describedby': help ? field.vars.id ~ '-help' : false,
+            } %}
+
+            {% if compound %}
+                {% for child in field.children %}
+                    <twig:Form:Row :field="child" />
+                {% endfor %}
+            {% elseif type == 'textarea' %}
+                <twig:Form:Textarea :field="field" {{ ...widgetAttr }} />
+            {% elseif type == 'choice' %}
+                <twig:Form:Select :field="field" {{ ...widgetAttr }} />
+            {% elseif type in ['button', 'submit'] %}
+                <twig:Button :type="type" {{ ...widgetAttr }}>{{ label }}</twig:Button>
+            {% else %}
+                <twig:Form:Input :field="field" :type="type" {{ ...widgetAttr }} />
+            {% endif %}
+        {% endblock %}
+
+        {% block errors %}
+            {% if hasErrors %}
+                <twig:Form:Errors :field="field" />
+            {% endif %}
+        {% endblock %}
+
+        {% block help %}
+            {% if help %}
+                <twig:Form:Help :field="field" :value="help" />
+            {% endif %}
+        {% endblock %}
+    {% endblock %}
+
+    {% if field %}
+        {% do field.setRendered %}
+    {% endif %}
+</{{ tag }}>

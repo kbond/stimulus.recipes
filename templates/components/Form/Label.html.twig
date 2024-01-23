@@ -1,0 +1,8 @@
+{% props field = null %}
+
+<label{{ attributes.defaults({
+    for: field.vars.id|default(false),
+    class: 'ui-form-label',
+}) }}>
+    {% block content %}{% endblock %}
+</label>

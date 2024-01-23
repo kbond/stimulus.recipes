@@ -101,7 +101,7 @@ class FunctionalTest extends KernelTestCase
     public function allRecipesWork(): void
     {
         foreach (self::getContainer()->get(RecipeRegistry::class) as $recipe) {
-            /** @var Recipe $recipe */
+            /* @var Recipe $recipe */
             $this->browser()
                 ->throwExceptions()
                 ->visit("/{$recipe->name}")

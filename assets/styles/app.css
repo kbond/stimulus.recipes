@@ -3,6 +3,7 @@
 @import 'alert.css';
 @import 'tooltip.css';
 @import 'button.css';
+@import 'form.css';
 
 @tailwind base;
 @tailwind components;

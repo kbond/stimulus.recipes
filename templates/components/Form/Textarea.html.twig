@@ -1,0 +1,5 @@
+{% props field = null %}
+
+<textarea{{ attributes.defaults({
+    class: 'ui-form-widget',
+}) }}>{% block content %}{{ field.vars.value|default }}{% endblock %}</textarea>
