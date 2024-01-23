@@ -22,34 +22,33 @@
         <h2 class="text-2xl font-semibold mt-3">JS Dependencies</h2>
 
         <p><em>Symfony AssetMapper</em></p>
-        <pre><code>bin/console importmap:require {{ recipe.dependencies.js|join(' ') }}</code></pre>
+        <twig:HighlightCode language="bash">bin/console importmap:require {{ recipe.dependencies.js|join(' ') }}</twig:HighlightCode>
 
         <p><em>NPM</em></p>
-        <pre><code>npm add {{ recipe.dependencies.js|join(' ') }}</code></pre>
+        <twig:HighlightCode language="bash">npm add {{ recipe.dependencies.js|join(' ') }}</twig:HighlightCode>
     {% endif %}
 
     {% if recipe.dependencies.node %}
         <h2 class="text-2xl font-semibold mt-3">Node.js Dependencies</h2>
 
-        <twig:Alert type="warning" class="mt-1">
+        <twig:Alert type="warning" class="mb-2">
             This recipe requires the following dependencies be installed with Node.js.
         </twig:Alert>
 
-        <p><em>NPM</em></p>
-        <pre><code>npm add {{ recipe.dependencies.node|join(' ') }}</code></pre>
+        <twig:HighlightCode language="bash">npm add {{ recipe.dependencies.node|join(' ') }}</twig:HighlightCode>
     {% endif %}
 
     {% if recipe.dependencies.php %}
         <h2 class="text-2xl font-semibold mt-3">PHP Dependencies</h2>
-        <div>
-            <pre><code>composer require {{ recipe.dependencies.php|join(' ') }}</code></pre>
-        </div>
+        <twig:HighlightCode language="bash">composer require {{ recipe.dependencies.php|join(' ') }}</twig:HighlightCode>
     {% endif %}
 
     {% if block('instructions', recipe.template) is defined %}
         <h2 class="text-2xl font-semibold mt-3">Instructions</h2>
 
-        {{ block('instructions', recipe.template) }}
+        <div class="prose">
+            {{ block('instructions', recipe.template) }}
+        </div>
     {% endif %}
 
     {% if recipe.files %}
