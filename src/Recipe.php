@@ -18,6 +18,7 @@ use App\Recipe\File;
  *          recipes?: string[],
  *     },
  *     files?: string|string[],
+ *     demo_files?: string|string[],
  * }
  */
 final class Recipe
@@ -32,7 +33,10 @@ final class Recipe
     public readonly array $dependencies;
 
     /** @var File[] */
-    public array $files;
+    public readonly array $files;
+
+    /** @var File[] */
+    public readonly array $demoFiles;
 
     /**
      * @param Manifest $manifest
@@ -54,6 +58,13 @@ final class Recipe
                 file_get_contents(sprintf('%s/%s', $projectDir, $path)) ?: throw new \RuntimeException(sprintf('Unable to read file "%s"', $path)),
             ),
             (array) ($manifest['files'] ?? [])
+        );
+        $this->demoFiles = array_map(
+            static fn (string $path) => new File(
+                $path,
+                file_get_contents(sprintf('%s/%s', $projectDir, $path)) ?: throw new \RuntimeException(sprintf('Unable to read file "%s"', $path)),
+            ),
+            (array) ($manifest['demo_files'] ?? [])
         );
     }
 

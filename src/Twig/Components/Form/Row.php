@@ -5,9 +5,6 @@ namespace App\Twig\Components\Form;
 use Symfony\Component\Form\FormView;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
-/**
- * @author Kevin Bond <kevinbond@gmail.com>
- */
 #[AsTwigComponent]
 final class Row
 {

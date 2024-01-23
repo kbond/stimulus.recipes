@@ -71,6 +71,11 @@
     <h2 class="text-2xl font-semibold mt-3">Source</h2>
     <twig:HighlightCode :code="recipe.demo" language="twig" theme="github-dark" class="mt-1" />
 
+    {% for file in recipe.demoFiles %}
+        <p class="mt-3"><em>{{ file.path }}</em></p>
+        <twig:HighlightCode :code="file.source" :language="file.extension" theme="github-dark" class="mb-3" />
+    {% endfor %}
+
     {% if recipe.references %}
         <h2 class="text-2xl font-semibold mt-3">Credit</h2>
         <ul>
