@@ -38,8 +38,21 @@ module.exports = {
 }</twig:HighlightCode>
 {% endblock %}
 
+{% block demo_wrapper %}
+    <turbo-frame id="form">
+        {{ block('demo') }}
+
+        {% if data is defined %}
+            <div class="mb-4">
+                <p class="mb-2"><em>Submitted Form Data:</em></p>
+                {{ dump(data) }}
+            </div>
+        {% endif %}
+    </turbo-frame>
+{% endblock %}
+
 {% block demo %}
-<twig:Form multipart class="max-w-sm">
+<twig:Form multipart class="max-w-sm" action="{{ path('form_demo') }}">
     <twig:Form:Row>
         <twig:Form:Label>Name</twig:Form:Label>
         <twig:Form:Input name="name" placeholder="Kevin Bond" />
@@ -76,8 +89,9 @@ module.exports = {
         <twig:Form:Input name="terms" type="checkbox" />
         <twig:Form:Help>Do you agree to our terms?</twig:Form:Help>
     </twig:Form:Row>
-    <twig:Form:Row>
+    <twig:Form:Row class="flex items-center">
         <twig:Button type="submit">Submit</twig:Button>
+        <div class="ml-4"><em>(click to view submitted data)</em></div>
     </twig:Form:Row>
 </twig:Form>
 {% endblock %}
