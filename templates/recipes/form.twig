@@ -22,6 +22,22 @@ files:
     - templates/components/Form/Textarea.html.twig
 {% endblock %}
 
+{% block instructions %}
+    <p>
+        To enable the <code>@tailwindcss/forms</code> plugin, you must add the following to
+        your <code>tailwind.config.js</code> file:
+    </p>
+    <twig:HighlightCode language="js">
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+    // ...
+    plugins: [
+        require('@tailwindcss/forms'),
+        // ...
+    ],
+}</twig:HighlightCode>
+{% endblock %}
+
 {% block demo %}
 <twig:Form multipart class="max-w-sm">
     <twig:Form:Row>
