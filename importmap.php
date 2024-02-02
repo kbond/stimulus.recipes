@@ -33,4 +33,7 @@ return [
     '@popperjs/core' => [
         'version' => '2.11.8',
     ],
+    'typed.js' => [
+        'version' => '2.1.0',
+    ],
 ];
