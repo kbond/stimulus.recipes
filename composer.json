@@ -78,7 +78,7 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "importmap:install": "symfony-cmd",
-            "npm install": "script",
+            "npm ci": "script",
             "tailwind:build": "symfony-cmd"
         },
         "post-install-cmd": [
