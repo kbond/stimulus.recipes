@@ -1,0 +1,39 @@
+{% block manifest %}
+title: Dialog
+description: Dialog.
+files:
+    - assets/controllers/dialog_controller.js
+dependencies:
+    recipes:
+        - button
+references:
+    - https://symfonycasts.com/screencast/last-stack/dialog
+    - https://dev.to/thomasvanholder/create-a-modal-with-the-html-dialog-element-tailwind-and-stimulus-573b
+{% endblock %}
+
+{% block demo %}
+<div class="relative inline-block" data-controller="dialog">
+    <twig:Button data-action="dialog#open">
+        Open
+    </twig:Button>
+    <dialog
+        data-dialog-target="dialog"
+        class="
+            min-w-96
+            p-8
+            relative
+            rounded-md
+            shadow-lg
+            backdrop:bg-black/50
+            backdrop:backdrop-blur-md
+        "
+    >
+        <button data-action="dialog#close" class="absolute right-2 top-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <p>Some content</p>
+    </dialog>
+</div>
+{% endblock %}
