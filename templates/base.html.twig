@@ -34,6 +34,14 @@
                     </ul>
                 </div>
                 <div class="w-4/5">
+                    {% for label, messages in app.flashes %}
+                        {% for message in messages %}
+                            <twig:Alert :type="label" class="mb-4">
+                                {{ message }}
+                            </twig:Alert>
+                        {% endfor %}
+                    {% endfor %}
+
                     {% block content %}{% endblock %}
                 </div>
             </section>

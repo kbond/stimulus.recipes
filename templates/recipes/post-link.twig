@@ -1,0 +1,14 @@
+{% block manifest %}
+title: Post Link
+description: Create a link/button that links to a URL using POST/DELETE/PUT method (with option for CSRF token and confirmation).
+files:
+    - assets/controllers/post_link_controller.js
+{% endblock %}
+
+{% block demo %}
+<a href="/_demo/post-link" data-controller="post-link" data-action="post-link#click">POST Link</a>
+<a href="/_demo/post-link" data-controller="post-link" data-post-link-method-value="put" data-action="post-link#click">PUT Link</a>
+<a href="/_demo/post-link" data-controller="post-link" data-post-link-method-value="delete" data-action="post-link#click">DELETE Link</a>
+<a href="/_demo/post-link" data-controller="post-link" data-post-link-confirm-value="Are you sure?" data-action="post-link#click">POST Link With Confirmation</a>
+<a href="/_demo/post-link" data-controller="post-link" data-post-link-csrf-token-value="{{ csrf_token('post-link') }}" data-action="post-link#click">POST Link With CSRF Token</a>
+{% endblock %}
