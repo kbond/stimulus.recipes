@@ -29,7 +29,7 @@ final class HighlightCode
     {
     }
 
-    public function highlight(string $code = null): string
+    public function highlight(?string $code = null): string
     {
         $code ??= $this->code;
 

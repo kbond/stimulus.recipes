@@ -25,7 +25,7 @@ final class DemoSymfonyFormController extends SymfonyFormController
         return parent::__invoke($request);
     }
 
-    protected function render(string $view, array $parameters = [], Response $response = null): Response
+    protected function render(string $view, array $parameters = [], ?Response $response = null): Response
     {
         /** @var FormInterface $form */
         $form = $parameters['form'];

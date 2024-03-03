@@ -81,7 +81,7 @@ final class RecipeRegistry implements \Countable, \IteratorAggregate, CacheWarme
         );
     }
 
-    public function warmUp(string $cacheDir, string $buildDir = null): array
+    public function warmUp(string $cacheDir, ?string $buildDir = null): array
     {
         // warm the cache
         $this->all();

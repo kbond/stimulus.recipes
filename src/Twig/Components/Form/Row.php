@@ -37,7 +37,7 @@ final class Row
     public bool $isValid;
 
     public function mount(
-        FormView $field = null,
+        ?FormView $field = null,
         bool $error = false,
         bool $valid = false,
     ): void {
