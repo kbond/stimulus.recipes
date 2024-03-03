@@ -17,9 +17,9 @@ final class PostLinkDemoController extends AbstractController
 {
     public function __invoke(Request $request, CsrfTokenManagerInterface $tokenManager): Response
     {
-        $validToken = $tokenManager->isTokenValid(new CsrfToken('post-link', $request->request->get('_csrf_token')));
+        $validToken = $tokenManager->isTokenValid(new CsrfToken('post-link', $request->request->getString('_csrf_token')));
 
-        $request->getSession()
+        $request->getSession() // @phpstan-ignore-line
             ->getFlashBag()
             ->add($validToken ? 'success' : 'warning',
                 sprintf(

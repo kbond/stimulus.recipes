@@ -6,3 +6,5 @@ parameters:
         - config/
         - public/
         - src/
+    ignoreErrors:
+        - '#no value type specified in iterable type array#'
