@@ -30,6 +30,6 @@ final class PostLinkDemoController extends AbstractController
             )
         ;
 
-        return $this->redirectToRoute('recipe', ['name' => 'post-link']);
+        return $this->redirect($request->headers->get('referer') ?: $this->generateUrl('recipe', ['name' => 'post-link']));
     }
 }

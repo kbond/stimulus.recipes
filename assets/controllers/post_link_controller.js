@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
     static values = {
-        href: String,
+        url: String,
         method: {
             type: String,
             default: 'POST'
@@ -14,7 +14,7 @@ export default class extends Controller {
     click(event) {
         event.preventDefault();
 
-        const href = this.hrefValue || this.element.href;
+        const href = this.urlValue || this.element.href;
         const form = document.createElement('form');
         const method = this.methodValue.toUpperCase();
 

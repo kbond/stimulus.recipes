@@ -1,0 +1,16 @@
+{% block manifest %}
+title: Post Button
+description: Button that submits to a URL using POST/DELETE/PUT method (with option for CSRF token and confirmation).
+files:
+    - templates/components/PostButton.html.twig
+dependencies:
+    recipes:
+        - post-link
+{% endblock %}
+
+{% block demo %}
+<twig:PostButton url="/_demo/post-link" class="me-2">POST</twig:PostButton>
+<twig:PostButton url="/_demo/post-link" method="put" class="me-2">PUT</twig:PostButton>
+<twig:PostButton url="/_demo/post-link" method="delete" red class="me-2">DELETE</twig:PostButton>
+<twig:PostButton url="/_demo/post-link" method="delete" :csrfToken="csrf_token('post-link')" confirm="Are you sure?" red class="me-2">DELETE with CSRF and Confirm</twig:PostButton>
+{% endblock %}

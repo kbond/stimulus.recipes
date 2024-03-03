@@ -1,0 +1,14 @@
+{% props url = null, csrfToken = null, method = 'POST', confirm = null, alt = null, green = null, red = null, yellow = null %}
+
+<button{{ attributes.defaults({
+    type: 'button',
+    class: 'ui-button ui-button-' ~ (alt ? 'alt' : green ? 'green' : red ? 'red' : yellow ? 'yellow' : 'default'),
+    'data-controller': 'post-link',
+    'data-action': 'post-link#click',
+    'data-post-link-confirm-value': confirm,
+    'data-post-link-method-value': method,
+    'data-post-link-csrf-token-value': csrfToken,
+    'data-post-link-url-value': url,
+}) }}>
+    {% block content %}{% endblock %}
+</button>
