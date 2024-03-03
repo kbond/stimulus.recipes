@@ -1,0 +1,21 @@
+{% props url = null, csrfToken = null, method = 'POST', confirm = null, alt = null, green = null, red = null, yellow = null %}
+
+{% set method = method|upper %}
+
+<form class="m-0 inline-block" action="{{ url }}" method="POST">
+    <button{{ attributes.defaults({
+        type: 'submit',
+        class: 'ui-button ui-button-' ~ (alt ? 'alt' : green ? 'green' : red ? 'red' : yellow ? 'yellow' : 'default'),
+        onclick: confirm ? "return confirm('" ~ confirm ~ "')" : null
+    }) }}>
+        {% block content %}{% endblock %}
+
+        {% if 'POST' != method %}
+            <input type="hidden" name="_method" value="{{ method }}">
+        {% endif %}
+
+        {% if csrfToken %}
+            <input type="hidden" name="_csrf_token" value="{{ csrfToken }}">
+        {% endif %}
+    </button>
+</form>

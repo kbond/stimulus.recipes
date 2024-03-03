@@ -1,0 +1,13 @@
+{% block manifest %}
+title: Submit Button
+description: Create button that submits to a URL using POST/DELETE/PUT method (with option for CSRF token and confirmation) without JS.
+files:
+    - templates/components/SubmitButton.html.twig
+{% endblock %}
+
+{% block demo %}
+<twig:SubmitButton url="/_demo/post-link" class="me-2">POST</twig:SubmitButton>
+<twig:SubmitButton url="/_demo/post-link" method="put" class="me-2">PUT</twig:SubmitButton>
+<twig:SubmitButton url="/_demo/post-link" method="delete" red class="me-2">DELETE</twig:SubmitButton>
+<twig:SubmitButton url="/_demo/post-link" method="delete" :csrfToken="csrf_token('post-link')" confirm="Are you sure?" red class="me-2">DELETE with CSRF and Confirm</twig:SubmitButton>
+{% endblock %}
