@@ -1,0 +1,19 @@
+{% block manifest %}
+title: Typed.js
+description: Typed.js Stimulus controller.
+files:
+    - assets/controllers/typed_controller.js
+dependencies:
+    js: typed.js
+{% endblock %}
+
+{% block demo %}
+<div
+    data-controller="typed"
+    data-typed-strings-value='["Hello, World!", "This is a simple typed.js example.", "Enjoy!"]'
+    data-typed-show-cursor-value="false"
+    data-typed-loop-value="true"
+    class="min-h-6"
+>
+</div>
+{% endblock %}
