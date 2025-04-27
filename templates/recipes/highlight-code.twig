@@ -1,33 +1,27 @@
 {% block manifest %}
 title: Highlight Code
-description: Highlight code block with Shiki with a copy button.
+description: Highlight code block with a copy button.
 files:
     - src/Twig/Components/HighlightCode.php
     - templates/components/HighlightCode.html.twig
     - assets/styles/highlight-code.css
 dependencies:
-    node:
-        - shiki
     php:
         - symfony/ux-twig-component
-        - symfony/cache
-        - spatie/shiki-php
+        - tempest/highlight
     recipes:
         - tooltip
         - clipboard
-references:
-    - https://shiki.matsu.io/
 {% endblock %}
 
 {% block demo %}
 <twig:HighlightCode
     code="echo sprintf('Hello %s!', $name); // this is passed as the code attribute"
     language="php"
-    theme="monokai"
     class="mb-4"
 />
 
-<twig:HighlightCode language="php" theme="monokai">
+<twig:HighlightCode language="php">
     echo sprintf('Hello %s!', $name); // this is passed as the content block
 </twig:HighlightCode>
 {% endblock %}
