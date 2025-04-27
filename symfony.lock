@@ -11,6 +11,9 @@
             ".php-cs-fixer.dist.php"
         ]
     },
+    "knplabs/knp-time-bundle": {
+        "version": "v2.4.0"
+    },
     "phpstan/phpstan": {
         "version": "1.10",
         "recipe": {

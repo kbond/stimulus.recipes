@@ -1,0 +1,16 @@
+{% props date, format = 'F j, Y g:ia', relative = false %}
+
+<time{{ attributes.defaults({
+    datetime: date|date('Y-m-d H:i:s'),
+    title: relative ? date|date(format) : null,
+    'data-controller': 'timestamp',
+    'data-timestamp-format-value': format,
+    'data-timestamp-attribute-value': relative ? 'title' : false,
+}) }}>
+    {% if relative %}
+        {{ date|ago }}
+    {% else %}
+        {{ date|date(format) }}
+    {% endif %}
+</time>
+

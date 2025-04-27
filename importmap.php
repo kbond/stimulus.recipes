@@ -33,4 +33,13 @@ return [
     '@popperjs/core' => [
         'version' => '2.11.8',
     ],
+    'dayjs' => [
+        'version' => '1.11.13',
+    ],
+    'dayjs/plugin/utc' => [
+        'version' => '1.11.13',
+    ],
+    'dayjs/plugin/timezone' => [
+        'version' => '1.11.13',
+    ],
 ];

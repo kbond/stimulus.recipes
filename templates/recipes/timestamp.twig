@@ -1,0 +1,31 @@
+{% block manifest %}
+title: Timestamp
+description: Render a `<time>` element that auto-converts to user's local timezone (guessed from browser).
+files:
+    - templates/components/Timestamp.html.twig
+dependencies:
+    php:
+        - symfony/ux-twig-component
+        - knplabs/knp-time-bundle
+    js:
+        - dayjs
+        - dayjs/plugin/utc
+        - dayjs/plugin/timezone
+{% endblock %}
+
+{% block demo %}
+{% set utcTime = date('+5 hours') %}
+
+<p>
+    <em>Raw:</em>
+    <span>{{ utcTime|date('F j, Y g:ia') }}
+</p>
+<p>
+    <em>Basic:</em>
+    <twig:Timestamp :date="utcTime" />
+</p>
+<p>
+    <em>Relative:</em>
+    <twig:Timestamp :date="utcTime" relative class="cursor-help border-b border-b-slate-500 border-dotted" />
+</p>
+{% endblock %}
